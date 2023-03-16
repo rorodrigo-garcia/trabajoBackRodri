@@ -11,11 +11,11 @@ class ProductManager{
        
         this.products= []
          this.path = filename;
-     //   if (fs.existsSync(filename)) {
-      //     this.productos = JSON.parse(fs.readFileSync(filename));
-       //  } else {
-        //   fs.writeFileSync(filename, JSON.stringify([]))
-       // }
+        if (fs.existsSync(filename)) {
+           this.productos = JSON.parse(fs.readFileSync(filename));
+         } else {
+           fs.writeFileSync(filename, JSON.stringify([]))
+        }
         
 
     }   
