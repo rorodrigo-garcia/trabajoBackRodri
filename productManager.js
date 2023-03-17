@@ -1,21 +1,18 @@
-const fs = require ('fs')
-const express = require('express')
-const app = express()
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-const PORT = 8080
+import fs from 'fs'
 
-class ProductManager{
+
+export class ProductManager{
     
     constructor (filename){
        
         this.products= []
          this.path = filename;
         if (fs.existsSync(filename)) {
-           this.productos = JSON.parse(fs.readFileSync(filename));
+            this.productos = JSON.parse(fs.readFileSync(filename));
+           
          } else {
-           fs.writeFileSync(filename, JSON.stringify([]))
-        }
+            fs.writeFileSync(filename, JSON.stringify([]))
+         }
         
 
     }   
@@ -127,11 +124,13 @@ class ProductManager{
 const newProduct = new ProductManager ("productos.json")
 newProduct.addProducts ({title:"tomate" , description :"Fruta versatil" , price : "300 el kilo" , thumbnails:"Sin imagen" , code:"t1" , stock:3 })
 newProduct.addProducts ({title:"cebolla" , description :"Verdura verde y versatil" , price : "250 el kilo" , thumbnails:"Sin imagen" , code:"C1" , stock:7 })
-newProduct.getProducts()
-newProduct.getProductById(1)
-newProduct.deleteProduct(3)
-newProduct.updateProduct({id:1, description:"Verdura."})
 
-app.listen(PORT,()=>{
-    console.log('el server esta escuchando');
-})
+newProduct.getProductById(1)
+newProduct.deleteProduct(1)
+newProduct.updateProduct({id:3, description:"Verdura."})
+newProduct.getProducts()
+
+
+
+
+
