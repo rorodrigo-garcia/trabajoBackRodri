@@ -1,7 +1,8 @@
 import fs from 'fs'
+import  express  from 'express';
 
 
-export class ProductManager{
+ export default class ProductManager{
     
     constructor (filename){
        
@@ -121,14 +122,15 @@ export class ProductManager{
 }
 
 
-const newProduct = new ProductManager ("productos.json")
-newProduct.addProducts ({title:"tomate" , description :"Fruta versatil" , price : "300 el kilo" , thumbnails:"Sin imagen" , code:"t1" , stock:3 })
-newProduct.addProducts ({title:"cebolla" , description :"Verdura verde y versatil" , price : "250 el kilo" , thumbnails:"Sin imagen" , code:"C1" , stock:7 })
+//  const newProduct = new ProductManager ("productos.json")
+// newProduct.addProducts ({title:"tomate" , description :"Fruta versatil" , price : "300 el kilo" , thumbnails:"Sin imagen" , code:"t1" , stock:3 })
+// newProduct.addProducts ({title:"cebolla" , description :"Verdura verde y versatil" , price : "250 el kilo" , thumbnails:"Sin imagen" , code:"C1" , stock:7 })
 
-newProduct.getProductById(1)
-newProduct.deleteProduct(1)
-newProduct.updateProduct({id:3, description:"Verdura."})
-newProduct.getProducts()
+// newProduct.getProductById(1)
+// newProduct.deleteProduct(1)
+// newProduct.updateProduct({id:3, description:"Verdura."})
+// newProduct.getProducts()
+
 
 
 
