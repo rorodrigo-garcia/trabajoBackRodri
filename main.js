@@ -33,17 +33,18 @@ app.get('/products', (req, res) => {
 
 })
 
-// app.get('products/:pid', (req,res)=>{
-//     const {id} = req.params
-//     if (!id) {
-//         return res.status(400).send("El id no se encuntra")
-//     }
-//     const validar = manager.find((user)=> user.id === id)
-//     res.status(200).json(validar)
-// })
+app.get('products/:pid', (req,res)=>{
+     const {id} = req.params
+     const filtrado = manager.find((user)=> user.id === id)
+    if (!id) {
+         res.status(400).send("El id no se encuntra")
+    }
+     res.status(200).json(filtrado)
+    console.log(filtrado);
+})
 
 
 
-app.listen(PORT,()=>{
-    console.log('el server esta escuchando');
+ app.listen(PORT,()=>{
+   console.log('el server esta escuchando');
 })
