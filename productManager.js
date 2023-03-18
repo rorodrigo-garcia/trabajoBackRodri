@@ -8,12 +8,11 @@ import  express  from 'express';
        
         this.products= []
          this.path = filename;
-        if (fs.existsSync(filename)) {
-            this.productos = JSON.parse(fs.readFileSync(filename));
-           
-         } else {
-            fs.writeFileSync(filename, JSON.stringify([]))
-         }
+        // if (fs.existsSync(filename)) {
+        //     this.productos = JSON.parse(fs.readFileSync(filename));
+        //  } else {
+        //     fs.writeFileSync(filename, JSON.stringify([]))
+        //  }
         
 
     }   
@@ -43,7 +42,7 @@ import  express  from 'express';
                 id : ProductManager.id
             }
             this.products.push(product)
-           console.log(this.products);
+           
 
             await fs.promises.writeFile(this.path, JSON.stringify(this.products) , 'utf-8')
                      
@@ -55,14 +54,21 @@ import  express  from 'express';
         
         }
         
-        getProducts = ()=> console.log(this.products);
+        getProducts = async ()=> { 
+            try {
+                return JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
+
+            } catch (error) {
+                console.log(error);
+            }
+         } 
         getProductById = async (id) =>{
            try {
          let lectura= await fs.promises.readFile(this.path, 'utf-8')
          let lecturaParse = JSON.parse(lectura)
       
         let productoFiltrado=lecturaParse.filter(product => product.id === id)
-        console.log(productoFiltrado[0]);
+        
            } catch (error) {
                 console.log(error);
            }
@@ -80,7 +86,7 @@ import  express  from 'express';
              }
              let productoIndice =lecturaParse.findIndex(e => e.id === id)
              lecturaParse.splice(productoIndice , 1)
-             console.log(lecturaParse);
+             
              await fs.promises.writeFile(this.path ,JSON.stringify(lecturaParse) ,'utf-8' )
              console.log("Se elimino correctamente");
             
@@ -122,13 +128,13 @@ import  express  from 'express';
 }
 
 
-//  const newProduct = new ProductManager ("productos.json")
+//   const newProduct = new ProductManager ("productos.json")
 // newProduct.addProducts ({title:"tomate" , description :"Fruta versatil" , price : "300 el kilo" , thumbnails:"Sin imagen" , code:"t1" , stock:3 })
-// newProduct.addProducts ({title:"cebolla" , description :"Verdura verde y versatil" , price : "250 el kilo" , thumbnails:"Sin imagen" , code:"C1" , stock:7 })
-
+//  newProduct.addProducts ({title:"cebolla" , description :"Verdura verde y versatil" , price : "250 el kilo" , thumbnails:"Sin imagen" , code:"C1" , stock:7 })
+// newProduct.addProducts({title:"Banana" , description:"Fruta amarilla",price:"300 el kilo", thumbnails:"Sin imagen", code:"B1",stock:15 })
 // newProduct.getProductById(1)
-// newProduct.deleteProduct(1)
-// newProduct.updateProduct({id:3, description:"Verdura."})
+// newProduct.deleteProduct(4)
+// newProduct.updateProduct({id:1, description:"Verdura."})
 // newProduct.getProducts()
 
 
