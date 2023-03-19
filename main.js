@@ -40,10 +40,10 @@ app.get('products/:pid', (req,res)=>{
     console.log(id);
     const filtrado = manager.find((user)=> user.id === pid)
     console.log(filtrado);
-    if (filtrado) {
-        res.status(200).json(filtrado)
-    }else{
+    if (!pid) {
         res.status(400).send("El id no se encuntra")
+    }else{
+        res.status(200).json(filtrado)
 
     }
     
