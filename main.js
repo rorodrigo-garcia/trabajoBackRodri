@@ -1,6 +1,6 @@
 import express from 'express';
 import ProductManager from './productManager.js'
-import fs from 'fs'
+
 
 
 const app = express()
@@ -23,10 +23,12 @@ app.get('/products', (req, res) => {
                 })
                 return
             }
-            res.send({
-                status:"sucess",
-                payload: result
-            })
+                res.send({
+                    status:"sucess",
+                    payload: result
+                })
+
+            
             
         } )        
         .catch((err ) =>console.log(err))
@@ -34,15 +36,18 @@ app.get('/products', (req, res) => {
 })
 
 app.get('products/:pid', (req,res)=>{
-     const {id} = req.params
-     const filtrado = manager.find((user)=> user.id === id)
-    if (!id) {
-         res.status(400).send("El id no se encuntra")
-    }
-     res.status(200).json(filtrado)
+    const {pid} = parseInt(req.params.id)
+    console.log(id);
+    const filtrado = manager.find((user)=> user.id === pid)
     console.log(filtrado);
-})
+    if (filtrado) {
+        res.status(200).json(filtrado)
+    }else{
+        res.status(400).send("El id no se encuntra")
 
+    }
+    
+})
 
 
  app.listen(PORT,()=>{
