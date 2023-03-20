@@ -42,9 +42,9 @@ app.get('/products', (req, res) => {
 app.get('/products/:pid', (req,res)=>{
     const producto = manager.getProducts()
     producto.then((data) =>{
-        const {userId} = req.query
-        if(req.query.userId){
-            let filtrado = data.findIdex((user) => user.id === userId)
+        const {userId} = req.params
+        if(req.params.userId){
+            let filtrado = data.filter((user) => user.id === userId)
             console.log(filtrado);
             res.send(
                 {
