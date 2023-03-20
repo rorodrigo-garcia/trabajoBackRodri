@@ -20,13 +20,17 @@ app.get('/products', (req, res) => {
                 res.send({
                     status:"success",
                     payload : result
+                    
                 })
-                return
-            }
+                
+            }else{
+                let result = data.slice(0 , req.query.limit) //profe,esto lo modifique porque devolvia un error 
                 res.send({
                     status:"sucess",
                     payload: result
                 })
+
+            }
 
             
             
@@ -35,18 +39,23 @@ app.get('/products', (req, res) => {
 
 })
 
-app.get('products/:pid', (req,res)=>{
-    const {pid} = parseInt(req.params.id)
-    console.log(id);
-    const filtrado = manager.find((user)=> user.id === pid)
-    console.log(filtrado);
-    if (!pid) {
-        res.status(400).send("El id no se encuntra")
-    }else{
-        res.status(200).json(filtrado)
+app.get('/products/:pid', (req,res)=>{
+    const producto = manager.getProducts()
+    producto.then((data) =>{
+        const {userId} = req.query
+        if(req.query.userId){
+            let filtrado = data.findIdex((user) => user.id === userId)
+            console.log(filtrado);
+            res.send(
+                {
+                    status:"success",
+                    payload: filtrado
+                }
+            )
+        }
+    })
+   .catch((err)=>console.log(err))
 
-    }
-    
 })
 
 
