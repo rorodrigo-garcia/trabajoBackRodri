@@ -47,7 +47,7 @@ app.get('/products', (req, res) => {
    await  producto.then((data) =>{
     const {pid} = req.params.id
     if (req.params.pid) {
-        let filtrado = data.find((user)=> user.id === pid)
+        let filtrado = data.filter((user)=> user.id === pid)
         console.log(filtrado);
        return res.send({
             status : "success",
