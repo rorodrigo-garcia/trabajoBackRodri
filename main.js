@@ -12,7 +12,9 @@ const manager =  new ProductManager('productos.json')
 
 
 app.get('/products', (req, res) => {
+    
         manager.getProducts()
+       
         .then((data) => {
             const {limit} = req.query
             if (req.query.limit) {
@@ -39,24 +41,24 @@ app.get('/products', (req, res) => {
 
 })
 
-app.get('/products/:pid', (req,res)=>{
+ app.get('/products/:pid', async (req,res)=>{
     const producto = manager.getProducts()
-    producto.then((data) =>{
-        const {userId} = req.params
-        if(req.params.userId){
-            let filtrado = data.filter((user) => user.id === userId)
-            console.log(filtrado);
-            res.send(
-                {
-                    status:"success",
-                    payload: filtrado
-                }
-            )
-        }
-    })
-   .catch((err)=>console.log(err))
+    console.log(producto);
+   await  producto.then((data) =>{
+    const {pid} = req.params.id
+    if (req.params.pid) {
+        let filtrado = data.find((user)=> user.id === pid)
+        console.log(filtrado);
+       return res.send({
+            status : "success",
+            payload : filtrado
+        })
+    }
+   }).catch((err)=>{
+    console.log(err);
+   })
 
-})
+ } )
 
 
  app.listen(PORT,()=>{
