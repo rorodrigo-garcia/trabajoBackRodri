@@ -1,3 +1,4 @@
+
 import express from 'express';
 import ProductManager from './productManager.js'
 
@@ -41,24 +42,50 @@ app.get('/products', (req, res) => {
 
 })
 
- app.get('/products/:pid', async (req,res)=>{
-    const producto = manager.getProducts()
-    console.log(producto);
-   await  producto.then((data) =>{
-    const {pid} = req.params.id
-    if (req.params.pid) {
-        let filtrado = data.filter((user)=> user.id === pid)
-        console.log(filtrado);
-       return res.send({
-            status : "success",
-            payload : filtrado
-        })
-    }
-   }).catch((err)=>{
-    console.log(err);
-   })
+//  app.get('/products/:pid', async (req,res)=>{
+//     const producto = manager.getProducts()
+//     console.log(producto);
+//    await  producto.then((data) =>{
+//     const {pid} = req.params.id
+//     let filtrado = data.find((user)=> user.id === pid)
+//     if (!req.params.id) {
+//         return res.status(404).send({message:"No"})
+//     } else {
+//         res.send(
+//             {
+//                 stauts:"success",
+//                 payload:filtrado
+//             }
+//         )
+//     }
+//    }).catch((err)=>{
+//     console.log(err);
+//    })
 
- } )
+//  } )
+ app.get('/products/:pid', (req,res)=>{
+     manager.getProducts()
+     .then((data) =>{
+        
+        const {pid} = req.params
+      console.log(pid);
+        if (req.params.pid) {
+            console.log(req.params.pid);
+            let filtrado = data.filter((user)=> user.pid === pid)
+            console.log(filtrado[2]);
+           return res.send({
+                status : "success",
+                payload : filtrado
+            })
+        }else{
+            console.log("No se definio");
+        }
+       })
+    .catch((err)=>{
+        console.log(err);
+       })
+    })
+  
 
 
  app.listen(PORT,()=>{
