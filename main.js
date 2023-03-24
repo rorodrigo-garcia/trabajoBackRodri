@@ -20,9 +20,11 @@ app.get('/products', (req, res) => {
             const {limit} = req.query
             if (req.query.limit) {
                 let result = data.slice(0 , req.query.limit)
+                
                 res.send({
                     status:"success",
                     payload : result
+                    
                     
                 })
                 
@@ -35,7 +37,7 @@ app.get('/products', (req, res) => {
 
             }
 
-            
+           
             
         } )        
         .catch((err ) =>console.log(err))
@@ -46,8 +48,8 @@ app.get('/products', (req, res) => {
 //     const producto = manager.getProducts()
 //     console.log(producto);
 //    await  producto.then((data) =>{
-//     const {pid} = req.params.id
-//     let filtrado = data.find((user)=> user.id === pid)
+//     const {pid} = req.params
+//     let filtrado = data.filter((user)=> user.id === pid)
 //     if (!req.params.id) {
 //         return res.status(404).send({message:"No"})
 //     } else {
@@ -66,16 +68,18 @@ app.get('/products', (req, res) => {
  app.get('/products/:pid', (req,res)=>{
      manager.getProducts()
      .then((data) =>{
-        
         const {pid} = req.params
-      console.log(pid);
-        if (req.params.pid) {
+         console.log(pid);
+        if (req.params.pid ) {
             console.log(req.params.pid);
-            let filtrado = data.filter((user)=> user.pid === pid)
-            console.log(filtrado[2]);
+            console.log(data);
+            let filtrado = data.find(product=> product.pid === pid)
+            
+            console.log(filtrado);
            return res.send({
                 status : "success",
-                payload : filtrado
+                payload : filtrado,
+                
             })
         }else{
             console.log("No se definio");
@@ -83,9 +87,24 @@ app.get('/products', (req, res) => {
        })
     .catch((err)=>{
         console.log(err);
-       })
-    })
-  
+       })})
+    //  app.get('products/:pid',(req,res)=>{
+    //    manager.getProducts()
+    //    .then((data)=>{
+    //     const {pid} = req.params
+    //     console.log(req.params.pid);
+    //     let filtrado = data.find((products)=> products.pid === pid)
+    //     if (!pid) {
+    //         return res.send({error: "producto no encontrado"})
+    //     }
+    //     res.send({filtrado})
+    //    }).catch((err)=>{
+    //     console.log(err);
+    //    })
+       
+       
+    //  })
+    
 
 
  app.listen(PORT,()=>{
