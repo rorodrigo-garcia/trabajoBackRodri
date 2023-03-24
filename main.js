@@ -65,17 +65,23 @@ app.get('/products', (req, res) => {
 //    })
 
 //  } )
+// const manejoDeFiltro = async ()=>{
+//     const productos = manager.getProducts(products.id)
+    
+// }
+
  app.get('/products/:pid', (req,res)=>{
      manager.getProducts()
      .then((data) =>{
-        const {pid} = req.params
-         console.log(pid);
+        let {pid} = req.params
+         
         if (req.params.pid ) {
-            console.log(req.params.pid);
-            console.log(data);
-            let filtrado = data.find(product=> product.pid === pid)
+           
+           
+            data.filter(a => console.log(a))
+            let filtrado = data.filter(product=> product.pid === pid)
             
-            console.log(filtrado);
+           
            return res.send({
                 status : "success",
                 payload : filtrado,
@@ -88,22 +94,21 @@ app.get('/products', (req, res) => {
     .catch((err)=>{
         console.log(err);
        })})
-    //  app.get('products/:pid',(req,res)=>{
-    //    manager.getProducts()
-    //    .then((data)=>{
-    //     const {pid} = req.params
-    //     console.log(req.params.pid);
-    //     let filtrado = data.find((products)=> products.pid === pid)
-    //     if (!pid) {
-    //         return res.send({error: "producto no encontrado"})
-    //     }
-    //     res.send({filtrado})
-    //    }).catch((err)=>{
-    //     console.log(err);
-    //    })
-       
-       
-    //  })
+//   app.get('/products/:pid',async (req,res)=>{
+//     const productos = manager.getProducts(data)
+//     console.log(productos);
+//     const {pid} = req.params.pid
+//     console.log(req.params.pid);
+//     if (!req.params.pid) {
+//         return res.status(404).send("No encontramos el id")
+//     } else{
+//         let filtrado = data.filter(e => e.pid === pid)
+//         return res.send({
+//             status : "success",
+//             payload : filtrado
+//         })
+//     }
+//   })
     
 
 
