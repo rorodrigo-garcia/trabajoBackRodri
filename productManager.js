@@ -66,7 +66,6 @@ import  express  from 'express';
            try {
          let lectura= await fs.promises.readFile(this.path, 'utf-8')
          let lecturaParse = JSON.parse(lectura)
-      
         let productoFiltrado=lecturaParse.filter(product => product.id === id)
         
            } catch (error) {
@@ -128,10 +127,10 @@ import  express  from 'express';
 }
 
 
-//   const newProduct = new ProductManager ("productos.json")
-// newProduct.addProducts ({title:"tomate" , description :"Fruta versatil" , price : "300 el kilo" , thumbnails:"Sin imagen" , code:"t1" , stock:3 })
-//  newProduct.addProducts ({title:"cebolla" , description :"Verdura verde y versatil" , price : "250 el kilo" , thumbnails:"Sin imagen" , code:"C1" , stock:7 })
-// newProduct.addProducts({title:"Banana" , description:"Fruta amarilla",price:"300 el kilo", thumbnails:"Sin imagen", code:"B1",stock:15 })
+ // const newProduct = new ProductManager ("productos.json")
+ //newProduct.addProducts ({title:"tomate" , description :"Fruta versatil" , price : "300 el kilo" , thumbnails:"Sin imagen" , code:"t1" , stock:3 })
+  //newProduct.addProducts ({title:"cebolla" , description :"Verdura verde y versatil" , price : "250 el kilo" , thumbnails:"Sin imagen" , code:"C1" , stock:7 })
+ //newProduct.addProducts({title:"Banana" , description:"Fruta amarilla",price:"300 el kilo", thumbnails:"Sin imagen", code:"B1",stock:15 })
 // newProduct.getProductById(1)
 // newProduct.deleteProduct(4)
 // newProduct.updateProduct({id:1, description:"Verdura."})

@@ -1,11 +1,12 @@
 [
     {
         "title": "tomate",
-        "description": "Verdura.",
+        "description": "Fruta versatil",
         "price": "300 el kilo",
         "thumbnails": "Sin imagen",
         "code": "t1",
-        "stock": 3
+        "stock": 3,
+        "id": 1
     },
     {
         "title": "cebolla",

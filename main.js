@@ -44,73 +44,21 @@ app.get('/products', (req, res) => {
 
 })
 
-//  app.get('/products/:pid', async (req,res)=>{
-//     const producto = manager.getProducts()
-//     console.log(producto);
-//    await  producto.then((data) =>{
-//     const {pid} = req.params
-//     let filtrado = data.filter((user)=> user.id === pid)
-//     if (!req.params.id) {
-//         return res.status(404).send({message:"No"})
-//     } else {
-//         res.send(
-//             {
-//                 stauts:"success",
-//                 payload:filtrado
-//             }
-//         )
-//     }
-//    }).catch((err)=>{
-//     console.log(err);
-//    })
-
-//  } )
-// const manejoDeFiltro = async ()=>{
-//     const productos = manager.getProducts(products.id)
-    
-// }
-
  app.get('/products/:pid', (req,res)=>{
      manager.getProducts()
      .then((data) =>{
-        let {pid} = req.params
-         
-        if (req.params.pid ) {
-           
-           
-            data.filter(a => console.log(a))
-            let filtrado = data.filter(product=> product.pid === pid)
-            
-           
-           return res.send({
-                status : "success",
-                payload : filtrado,
-                
-            })
-        }else{
-            console.log("No se definio");
-        }
+        console.log(data);
+        const {pid} = req.params  
+        data.filter(product => console.log(typeof product.id))
+        console.log(typeof pid);
+        const filtrado = data.filter((product)=> product.id === +pid)
+       
+        
+       res.send(filtrado)
        })
     .catch((err)=>{
         console.log(err);
        })})
-//   app.get('/products/:pid',async (req,res)=>{
-//     const productos = manager.getProducts(data)
-//     console.log(productos);
-//     const {pid} = req.params.pid
-//     console.log(req.params.pid);
-//     if (!req.params.pid) {
-//         return res.status(404).send("No encontramos el id")
-//     } else{
-//         let filtrado = data.filter(e => e.pid === pid)
-//         return res.send({
-//             status : "success",
-//             payload : filtrado
-//         })
-//     }
-//   })
-    
-
 
  app.listen(PORT,()=>{
    console.log('el server esta escuchando');
